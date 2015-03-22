@@ -26,7 +26,8 @@
                     <td><a href="index.php?r=logger&p=alterar&codigo=<?=$linha['id'] ?>">Alterar</a> </td>
                 </tr>
             <?php } ?>
-            <a href="index.php?r=logger&p=cadastrar">novo login</a>
+            <a href="index.php?r=logger&p=cadastrar">novo login</a></br>
+            <a href="index.php?r=logger&p=exportar">exportar xml</a>
         </table>
     </body>
 </html>

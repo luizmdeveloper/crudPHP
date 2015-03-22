@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<usuarios>
+	<usuario>
+		<login>Luiz Mario</login>
+		<senha>123</senha>
+	</usuario>
+	<usuario>
+		<login>Maria Livia</login>
+		<senha>teste</senha>
+	</usuario>
+	<usuario>
+		<login>djalmo</login>
+		<senha>xml</senha>
+	</usuario>
+</usuarios>

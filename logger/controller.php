@@ -29,10 +29,46 @@
         case "alterar":
             alterarUsuario($connection);
             break;
+        case "importar":
+            importarUsarioXML($connection, "logger/usuarios.xml");
+            break;
+        case "exportar":
+            exportarUsuarioXML($connection, "logger/bckp_usuarios.xml");
+            break;
         default:
             $dados = carregarDados($connection);
             require("view.php");
             break;
+    }
+
+    function exportarUsuarioXML($connection, $caminho){
+        $title = "Exportando Arquivo para XML";
+        $resultadoExc = "Exportacao concluida com sucesso !!";
+        $dados = listarDados_usuario($connection);
+        $xml = "<?xml version='1.0' encoding='iso-8859-1'?>";
+        $xml .= "<usuarios>";
+        foreach ($dados as $usuario){
+            $xml .= "<usuario>";
+                $xml .= "<id>".$usuario['id']."</id>";
+                $xml .= "<login>".$usuario['login']."</login>";
+                $xml .= "<senha>".$usuario['senha']."</senha>";
+            $xml .= "</usuario>";
+        }
+        $xml .= "/<usuarios>";
+        require("view.php");
+        file_put_contents($caminho, $xml);
+    }
+
+    function importarUsarioXML ($connection, $caminho){
+        $xml = simplexml_load_file($caminho);
+        foreach ($xml as $usuario){
+            if (! cadastrar_usuario($connection, $usuario->login, $usuario->senha)){
+                echo "Erro ao inserir usuario ". $usuario->login." ".mysqli_error($connection)."</br>";
+            }
+        }
+        $resultadoExc = "Usuarios importados com sucesso !!!";
+        $dados = carregarDados($connection);
+        require("view.php");
     }
 
     function alterarUsuario($connection){
